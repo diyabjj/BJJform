@@ -50,26 +50,25 @@
     button:hover {
       background-color: #1565c0;
     }
-    .qr-section-title {
-      font-weight: bold;
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #444;
+    .terms-box {
+      margin-top: 30px;
+      background-color: #fffbe6;
+      border-left: 6px solid #ffc107;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      max-height: 250px;
+      overflow: auto;
     }
     .qr-images {
       display: flex;
       justify-content: space-around;
-      align-items: center;
       flex-wrap: wrap;
       gap: 20px;
+      margin-top: 20px;
     }
     .qr-images div {
       text-align: center;
-    }
-    .qr-images img {
-      border: 1px solid #ccc;
-      border-radius: 6px;
     }
     @media screen and (max-width: 600px) {
       .qr-images {
@@ -82,7 +81,7 @@
   <div class="container">
     <h1>BJJ IMPACTO OKINAWA 会員申込フォーム</h1>
     <form action="https://formsubmit.co/bjjokiflavio@gmail.com" method="POST" enctype="multipart/form-data">
-      
+
       <label>お名前 / Full Name</label>
       <input type="text" name="お名前" required>
 
@@ -126,20 +125,31 @@
       <label>契約日 / Date of Agreement</label>
       <input type="date" name="契約日" required>
 
-      <label>
+      <div class="terms-box">
+        <h3>📜 会員規約｜Membership Terms</h3>
+        <ul>
+          <li>すべての会員は、清潔・健康を保ち、仲間に敬意を持って練習に臨んでください。<br><em>All members must stay clean and healthy and show respect to teammates.</em></li>
+          <li>爪は、手のひらや足の裏から見えない程度に短く切ってください。<br><em>Nails must be trimmed short (not visible from the palm or sole).</em></li>
+          <li>入会時に、入会金と1ヶ月分の月謝をお支払いいただきます。<br><em>Upon joining, pay the admission fee + 1 month membership fee.</em></li>
+          <li>2ヶ月目以降は、毎月自動で引き落としされます。<br><em>From the 2nd month, monthly fees will be auto-charged.</em></li>
+          <li>休会・退会は、申請とジムの確認をもって有効になります。<br><em>To suspend or cancel, you must request and receive confirmation from the gym.</em></li>
+          <li>返金は一切できません。<br><em>No refunds will be issued under any circumstances.</em></li>
+        </ul>
+      </div>
+
+      <label style="margin-top: 10px;">
         <input type="checkbox" name="利用規約同意" required>
         上記の規約に同意します / I agree to the terms and conditions
       </label>
 
-      <div class="qr-section-title">お支払い / Payment</div>
       <div class="qr-images">
         <div>
-          <img src="kids_class_qr.png" alt="キッズクラス QRコード" width="180" />
+          <img src="kids_class_qr.png" alt="キッズクラス QRコード" width="180">
           <p>キッズクラス</p>
           <a href="https://your-kids-payment-link.com" target="_blank">https://your-kids-payment-link.com</a>
         </div>
         <div>
-          <img src="adult_class_qr.png" alt="アダルトクラス QRコード" width="180" />
+          <img src="adult_class_qr.png" alt="アダルトクラス QRコード" width="180">
           <p>アダルトクラス</p>
           <a href="https://your-adult-payment-link.com" target="_blank">https://your-adult-payment-link.com</a>
         </div>
