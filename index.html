@@ -1,240 +1,163 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BJJ OKINAWA 入会フォーム</title>
+  <title>BJJ IMPACT - 入会フォーム</title>
   <style>
     body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background-color: #f5f5f5;
+      font-family: "Arial", sans-serif;
+      background-color: #f2f2f2;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
     .container {
-      background: #fff;
-      padding: 30px;
       max-width: 800px;
-      margin: auto;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-      color: #333;
+      color: #222;
     }
     label {
       font-weight: bold;
-      display: block;
-      margin-top: 20px;
     }
-    input, select, textarea {
+    input, textarea, select {
       width: 100%;
-      padding: 10px;
-      margin-top: 6px;
+      padding: 12px;
+      margin: 8px 0 20px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 30px;
-      padding: 14px;
-      background-color: #1976d2;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      width: 100%;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1565c0;
-    }
-    .qr-section-title {
-      font-weight: bold;
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #444;
-    }
-    .qr-images {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .qr-images div {
-      text-align: center;
     }
     canvas {
       border: 1px solid #ccc;
-      border-radius: 8px;
+      display: block;
+      margin: 8px 0 20px;
+      touch-action: none;
+    }
+    button {
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
     .terms-box {
       max-height: 300px;
       overflow-y: scroll;
-      border: 1px solid #ccc;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
       padding: 15px;
-      margin-top: 10px;
-      background-color: #fafafa;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    @media screen and (max-width: 600px) {
-      .qr-images {
-        flex-direction: column;
-      }
+      margin-bottom: 20px;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>BJJ IMPACTO OKINAWA 会員申込フォーム</h1>
-    <form action="https://formsubmit.co/bjjokiflavio@gmail.com" method="POST" enctype="multipart/form-data">
-      <label>お名前 / Full Name</label>
-      <input type="text" name="お名前" required>
+    <h1>BJJ IMPACT 入会フォーム</h1>
+    <form>
+      <label>名前：</label>
+      <input type="text" name="name" required />
 
-      <label>生年月日 / Date of Birth</label>
-      <input type="date" name="生年月日" required>
+      <label>生年月日：</label>
+      <input type="date" name="dob" required />
 
-      <label>メールアドレス / Email</label>
-      <input type="email" name="メールアドレス" required>
+      <label>メールアドレス：</label>
+      <input type="email" name="email" required />
 
-      <label>電話番号 / Phone Number</label>
-      <input type="tel" name="電話番号" required>
+      <label>電話番号：</label>
+      <input type="tel" name="phone" required />
 
-      <label>顔写真のアップロード / Upload a recent face photo</label>
-      <input type="file" name="顔写真" accept="image/*" required>
-
-      <label>柔術経験はありますか？ / Do you have BJJ experience?</label>
-      <select name="柔術経験" required>
-        <option value="なし">なし / No</option>
-        <option value="あり">あり / Yes</option>
-      </select>
-
-      <label>経験がある方は帯の色 / Your belt color if experienced</label>
-      <select name="帯の色">
-        <option value="">選択してください</option>
-        <option value="白帯">白帯</option>
-        <option value="青帯">青帯</option>
-        <option value="紫帯">紫帯</option>
-        <option value="茶帯">茶帯</option>
-        <option value="黒帯">黒帯</option>
-      </select>
-
-      <label>持病や既往歴 / Medical conditions</label>
-      <textarea name="持病・既往歴" rows="4"></textarea>
-
-      <label>緊急連絡先（氏名・電話番号） / Emergency Contact</label>
-      <input type="text" name="緊急連絡先" required>
-
-      <label>署名（タイプ） / Digital Signature</label>
-      <input type="text" name="署名" required>
-
-      <label>手書き署名 / Draw your signature</label>
-      <canvas id="signature" width="500" height="150"></canvas>
-      <input type="hidden" name="署名画像" id="signatureData">
-
-      <label>契約日 / Date of Agreement</label>
-      <input type="date" name="契約日" required>
-
-      <label>規約 / Terms & Conditions</label>
+      <label>入会規約：</label>
       <div class="terms-box">
-        <h3>【敬意と衛生｜Respect & Hygiene】</h3>
-        <ul>
-          <li>すべての会員は清潔・健康を保ち、仲間に敬意を持って練習に臨んでください。</li>
-          <li>マットに立つ前に爪は短く清潔にし、長髪は結んでください。</li>
-          <li>ラッシュガードは道着の下に必ず着用してください。</li>
-        </ul>
-        <ul>
-          <li>All members must maintain good personal hygiene and show respect to teammates during training.</li>
-          <li>Nails must be trimmed short before stepping on the mat, and long hair must be tied.</li>
-          <li>A rash guard must always be worn under the gi.</li>
-        </ul>
+【敬意と衛生｜Respect & Hygiene】
+• すべての会員は清潔・健康を保ち、仲間に敬意を持って練習に臨んでください。
+• マットに立つ前に爪は短く清潔にし、長髪は結んでください。
+• ラッシュガードは道着の下に必ず着用してください。
 
-        <h3>【お支払い｜Payments】</h3>
-        <ul>
-          <li>入会時に自動引き落とし手続きを完了してください。</li>
-          <li>2ヶ月目以降、月謝は毎月自動引き落としとなります。</li>
-        </ul>
-        <ul>
-          <li>Complete the auto-payment setup at the time of enrollment.</li>
-          <li>From the second month onward, monthly fees will be automatically charged.</li>
-        </ul>
+Respect & Hygiene
+• All members must maintain good personal hygiene and show respect to teammates during training.
+• Nails must be trimmed short before stepping on the mat, and long hair must be tied.
+• A rash guard must always be worn under the gi.
 
-        <h3>【返金｜Refunds】</h3>
-        <ul>
-          <li>ご入金後の返金は、いかなる理由であってもお受けできません。</li>
-          <li>No refunds will be issued under any circumstances.</li>
-        </ul>
+【お支払い｜Payments】
+• 入会時に自動引き落とし手続きを完了してください。
+• 2ヶ月目以降、月謝は毎月自動引き落としとなります。
 
-        <h3>【免責｜Waiver of Liability】</h3>
-        <ul>
-          <li>会員は、当クラブの活動に参加するにあたり、事故・怪我・疾病等が発生した場合でも、当クラブ、指導者、関係者に一切の責任を問わないことに同意します。</li>
-          <li>Members agree that the Club, its instructors, and any related parties will not be held responsible for any accidents, injuries, or illnesses occurring during participation.</li>
-        </ul>
+Payments
+• Complete the auto-payment setup at the time of enrollment.
+• From the second month onward, monthly fees will be automatically charged.
 
-        <h3>【休会・退会｜Leave/Withdrawal】</h3>
-        <ul>
-          <li>会員が休会・退会を希望する場合、所定の手続きを提出してください。</li>
-          <li>クラブが書類を受領した2日後に休会・退会が完了となります。</li>
-          <li>会費の返金は行いません。</li>
-        </ul>
-        <ul>
-          <li>Members who wish to take a break or withdraw must submit the designated form.</li>
-          <li>The leave or withdrawal will be finalized 2 days after the Club receives the form.</li>
-          <li>Membership fees will not be refunded.</li>
-        </ul>
+【返金｜Refunds】
+• ご入金後の返金は、いかなる理由であってもお受けできません。
 
-        <h3>【同意｜Agreement】</h3>
-        <p>私は上記の規約をすべて読み、理解し、同意します。</p>
-        <p>I have read, understood, and agree to the above terms and conditions.</p>
+Refunds
+• No refunds will be issued under any circumstances.
+
+【免責｜Waiver of Liability】
+• 会員は、当クラブの活動に参加するにあたり、事故・怪我・疾病等が発生した場合でも、当クラブ、指導者、関係者に一切の責任を問わないことに同意します。
+
+Waiver of Liability
+• Members agree that the Club, its instructors, and any related parties will not be held responsible for any accidents, injuries, or illnesses occurring during participation.
+
+【休会・退会｜Leave/Withdrawal】
+• 会員が休会・退会を希望する場合、所定の手続きを提出してください。
+• クラブが書類を受領した2日後に休会・退会が完了となります。
+• 会費の返金は行いません。
+
+Leave/Withdrawal
+• Members who wish to take a break or withdraw must submit the designated form.
+• The leave or withdrawal will be finalized 2 days after the Club receives the form.
+• Membership fees will not be refunded.
+
+【同意｜Agreement】
+私は上記の規約をすべて読み、理解し、同意します。
+I have read, understood, and agree to the above terms and conditions.
       </div>
 
       <label>
-        <input type="checkbox" name="利用規約同意" required>
-        上記の規約に同意します / I agree to the terms and conditions
+        <input type="checkbox" required /> 上記の規約に同意します
       </label>
 
-      <div class="qr-section-title">お支払い / Payment</div>
-      <div class="qr-images">
-        <div>
-          <img src="kids_class_qr.png" alt="キッズクラス QRコード" width="180" />
-          <p>キッズクラス</p>
-        </div>
-        <div>
-          <img src="adult_class_qr.png" alt="アダルトクラス QRコード" width="180" />
-          <p>アダルトクラス</p>
-        </div>
-      </div>
+      <label>署名（指で書いてください）：</label>
+      <canvas id="signature-pad" width="600" height="200"></canvas>
+      <button type="button" onclick="clearCanvas()">署名をクリア</button>
 
-      <button type="submit">送信 / Submit</button>
+      <br><br>
+      <button type="submit">送信</button>
     </form>
   </div>
 
   <script>
-    const canvas = document.getElementById('signature');
+    const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let drawing = false;
 
-    canvas.addEventListener('mousedown', () => drawing = true);
-    canvas.addEventListener('mouseup', () => {
-      drawing = false;
-      document.getElementById('signatureData').value = canvas.toDataURL();
-    });
-    canvas.addEventListener('mouseout', () => drawing = false);
-    canvas.addEventListener('mousemove', draw);
-
-    function draw(e) {
-      if (!drawing) return;
-      ctx.lineWidth = 2;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#000';
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.stroke();
+    canvas.addEventListener('pointerdown', (e) => {
+      drawing = true;
       ctx.beginPath();
       ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+      if (drawing) {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
+    });
+
+    canvas.addEventListener('pointerup', () => drawing = false);
+    canvas.addEventListener('pointerleave', () => drawing = false);
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   </script>
 </body>
