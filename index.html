@@ -84,10 +84,12 @@
     }
     canvas {
       width: 100%;
-      height: 300px;
+      max-width: 800px;
+      height: auto;
       border: 1px solid #ccc;
       border-radius: 6px;
       margin-top: 10px;
+      touch-action: none;
     }
     .signature-controls {
       margin-top: 10px;
@@ -141,43 +143,33 @@
       <label>規約内容 / Terms</label>
       <div class="scroll-box">
         <p><strong>【敬意と衛生｜Respect & Hygiene】</strong><br>
-        • すべての会員は清潔・健康を保ち、仲間に敬意を持って練習に臨んでください。<br>
-        • マットに立つ前に爪は短く清潔にし、長髪は結んでください。<br>
-        • ラッシュガードは道着の下に必ず着用してください。<br><br>
-        • All members must maintain cleanliness and good health, and train with respect for others.<br>
-        • Nails must be trimmed and clean before stepping on the mat. Long hair must be tied.<br>
-        • A rash guard must always be worn under the gi.</p>
+        • 清潔・健康を保ち、仲間に敬意を持って練習に致むこと<br>
+        • 爪は短く、長髪は縮むこと<br>
+        • 道着の下にラッシュガードを着用<br><br>
+        • Maintain hygiene and respect. Trim nails. Tie long hair. Wear rash guard under gi.</p>
 
         <hr>
         <p><strong>【お支払い｜Payments】</strong><br>
-        • 入会時に自動引き落とし手続きを完了してください。<br>
-        • 2ヶ月目以降、月謝は毎月自動引き落としとなります。<br><br>
-        • Please complete the auto-payment registration upon enrollment.<br>
-        • Monthly membership fees will be automatically withdrawn from the second month onward.</p>
+        • 入会時に自動引き落とし手続きを完了<br>
+        • 2ヶ月目以降、月請は自動引き落とし<br><br>
+        • Complete the auto-payment setup at the time of enrollment. Monthly fees auto-charged from 2nd month.</p>
 
         <hr>
         <p><strong>【返金｜Refunds】</strong><br>
-        • ご入金後の返金は、いかなる理由であってもお受けできません。<br><br>
-        • No refunds will be issued under any circumstances after payment has been made.</p>
+        • ご入金後の返金はいかなる理由でも受けつけない<br><br>
+        • No refunds will be issued under any circumstances.</p>
 
         <hr>
         <p><strong>【免責｜Waiver of Liability】</strong><br>
-        • 会員は、当クラブの活動に参加するにあたり、事故・怪我・疾病等が発生した場合でも、当クラブ、指導者、関係者に一切の責任を問わないことに同意します。<br><br>
-        • Members agree not to hold the club, instructors, or any related parties responsible for any accidents, injuries, or illnesses that may occur during participation.</p>
+        • 事故・病気の負傷については一切責任を問わないことに同意<br><br>
+        • Members agree the club/instructors aren't responsible for any accidents or illnesses.</p>
 
         <hr>
-        <p><strong>【休会・退会｜Leave / Withdrawal】</strong><br>
-        • 会員が休会・退会を希望する場合、所定の手続きを提出してください。<br>
-        • クラブが書類を受領した2日後に休会・退会が完了となります。<br>
-        • 会費の返金は行いません。<br><br>
-        • Members who wish to take a leave of absence or withdraw must submit the required form.<br>
-        • Leave or withdrawal will take effect 2 days after the club receives the form.<br>
-        • Membership fees will not be refunded.</p>
-
-        <hr>
-        <p><strong>【同意｜Agreement】</strong><br>
-        私は上記の規約をすべて読み、理解し、同意します。<br>
-        I have read, understood, and agree to all the terms and conditions stated above.</p>
+        <p><strong>【休会・退会｜Leave/Withdrawal】</strong><br>
+        • 予約手続きを提出すること<br>
+        • 受付後2日で有効<br>
+        • 会費の返金はしない<br><br>
+        • Submit designated form. Effective 2 days after received. No refunds.</p>
       </div>
 
       <label>
@@ -186,7 +178,7 @@
       </label>
 
       <label>手書き署名 / Handwritten Signature</label>
-      <canvas id="signatureCanvas"></canvas>
+      <canvas id="signatureCanvas" width="800" height="300"></canvas>
       <div class="signature-controls">
         <button type="button" onclick="clearCanvas()">署名をクリア</button>
       </div>
@@ -215,15 +207,25 @@
     const ctx = canvas.getContext("2d");
     let drawing = false;
 
+    function getMousePos(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
     canvas.addEventListener("mousedown", e => {
       drawing = true;
+      const pos = getMousePos(e);
       ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
+      ctx.moveTo(pos.x, pos.y);
     });
 
     canvas.addEventListener("mousemove", e => {
       if (drawing) {
-        ctx.lineTo(e.offsetX, e.offsetY);
+        const pos = getMousePos(e);
+        ctx.lineTo(pos.x, pos.y);
         ctx.stroke();
       }
     });
@@ -236,8 +238,10 @@
       drawing = true;
       const touch = e.touches[0];
       const rect = canvas.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+      const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
       ctx.beginPath();
-      ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.moveTo(x, y);
     });
 
     canvas.addEventListener("touchmove", e => {
@@ -245,7 +249,9 @@
       if (drawing) {
         const touch = e.touches[0];
         const rect = canvas.getBoundingClientRect();
-        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+        ctx.lineTo(x, y);
         ctx.stroke();
       }
     });
